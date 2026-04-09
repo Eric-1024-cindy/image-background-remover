@@ -31,16 +31,19 @@ export default function CompareSlider({ originalImage, resultImage, alt = 'Compa
   return (
     <div
       ref={containerRef}
-      className="relative w-full max-w-2xl mx-auto overflow-hidden rounded-xl select-none cursor-ew-resize"
+      className="relative w-full overflow-hidden rounded-xl select-none cursor-ew-resize shadow-inner"
       onMouseMove={handleMouseMove}
       onTouchMove={handleTouchMove}
       style={{ touchAction: 'pan-y' }}
     >
+      {/* Checkerboard background for result (shows transparency) */}
+      <div className="absolute inset-0 checkerboard" />
+
       {/* Result image (background) */}
       <img
         src={resultImage}
         alt={`${alt} - Result`}
-        className="w-full h-auto block"
+        className="relative w-full h-auto block"
         draggable={false}
       />
 
@@ -60,20 +63,27 @@ export default function CompareSlider({ originalImage, resultImage, alt = 'Compa
 
       {/* Slider line */}
       <div
-        className="absolute top-0 bottom-0 w-1 bg-white shadow-lg cursor-ew-resize"
+        className="absolute top-0 bottom-0 w-0.5 bg-white shadow-lg cursor-ew-resize"
         style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
       >
         {/* Slider handle */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center">
-          <span className="text-gray-500 text-xs">⋮</span>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center border border-slate-200">
+          <div className="flex items-center gap-0.5">
+            <svg className="w-3 h-3 text-slate-400" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M8 5l-5 7 5 7M16 5l5 7-5 7" strokeWidth="2" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            <svg className="w-3 h-3 text-slate-400" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M16 5l5 7-5 7M8 5l-5 7 5 7" strokeWidth="2" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
         </div>
       </div>
 
       {/* Labels */}
-      <div className="absolute top-3 left-3 px-2 py-1 bg-black/60 text-white text-xs rounded">
+      <div className="absolute top-3 left-3 px-2.5 py-1 bg-black/60 text-white text-xs font-medium rounded-lg backdrop-blur-sm">
         Original
       </div>
-      <div className="absolute top-3 right-3 px-2 py-1 bg-black/60 text-white text-xs rounded">
+      <div className="absolute top-3 right-3 px-2.5 py-1 bg-black/60 text-white text-xs font-medium rounded-lg backdrop-blur-sm">
         Result
       </div>
     </div>

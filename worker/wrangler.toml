@@ -1,0 +1,10 @@
+name = "image-background-remover-api"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+[vars]
+# Default API key (will be overridden by environment variable)
+REMOVE_BG_API_KEY = "2CRu7A18Vonjf7UbymGN7P5s"
+
+# Secure secret (set via `wrangler secret put REMOVE_BG_API_KEY`)
+# To override: wrangler secret put REMOVE_BG_API_KEY --env production
