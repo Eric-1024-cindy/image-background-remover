@@ -1,0 +1,5 @@
+name: image-background-remover
+compatibility_flags:
+  - nodejs_compat
+build_command: npm install --no-package-lock && npm run build
+build_output_dir: out
