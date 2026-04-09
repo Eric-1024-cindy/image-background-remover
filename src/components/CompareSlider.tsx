@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState, useCallback } from 'react'
+import { useRef, useState, useCallback, useEffect } from 'react'
 
 interface CompareSliderProps {
   originalImage: string
@@ -10,7 +10,14 @@ interface CompareSliderProps {
 
 export default function CompareSlider({ originalImage, resultImage, alt = 'Compare' }: CompareSliderProps) {
   const [sliderPosition, setSliderPosition] = useState(50)
+  const [containerWidth, setContainerWidth] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (containerRef.current) {
+      setContainerWidth(containerRef.current.offsetWidth)
+    }
+  }, [])
 
   const handleMove = useCallback((clientX: number) => {
     if (!containerRef.current) return
@@ -57,7 +64,7 @@ export default function CompareSlider({ originalImage, resultImage, alt = 'Compa
           alt={`${alt} - Original`}
           className="h-full object-cover"
           draggable={false}
-          style={{ width: containerRef.current?.offsetWidth }}
+          style={{ width: containerWidth || 'auto' }}
         />
       </div>
 
