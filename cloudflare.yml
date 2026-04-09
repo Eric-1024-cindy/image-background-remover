@@ -1,0 +1,11 @@
+# Cloudflare Pages Configuration
+# https://developers.cloudflare.com/pages/platform/build-configuration
+
+build_command: npm run build
+build_output_dir: out
+
+# Environment variables for build
+env:
+  NODE_VERSION: 20
+  NPM_CONFIG_JOBS: 1
+  NPM_CONFIG_PRODUCTION: false
